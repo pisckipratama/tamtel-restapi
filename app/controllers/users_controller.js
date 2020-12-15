@@ -38,7 +38,14 @@ class UsersController {
         status: 201,
         success: true,
         message: "User was created successfully!",
-        data,
+        content: {
+          id: data.dataValues.id,
+          emaill: data.dataValues.email,
+          photo: data.dataValues.photo,
+          is_admin: data.dataValues.is_admin,
+          createdAt: data.dataValues.createdAt,
+          updatedAt: data.dataValues.updatedAt,
+        },
       });
     } catch (error) {
       console.error(error.message);
@@ -81,7 +88,7 @@ class UsersController {
             status: 200,
             success: true,
             message: "login successfully",
-            content: { ...payload, token },
+            token,
           });
         } else {
           res.status(400).json({

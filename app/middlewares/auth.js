@@ -1,48 +1,51 @@
-const jwt = require('jsonwebtoken');
-const models = require('../models/index');
+const jwt = require("jsonwebtoken");
+const ErrorResponse = require("../helpers/error_response");
+const models = require("../models/index");
 
-
+// protect routes
 exports.protects = async (req, res, next) => {
-  let token 
-  
-  try {
-    
-  } catch (error) {
-    
-  }
-}
-// Protect routes
-exports.protects = asyncHandler(async (req, res, next) => {
   let token;
 
   if (
     req.headers.authorization &&
-    req.headers.authorization.startsWith('Bearer')
+    req.headers.authorization.startsWith("Bearer")
   ) {
-    token = req.headers.authorization.split(' ')[1];
+    token = req.headers.authorization.split(" ")[1];
   } else if (req.cookies.token) {
     token = req.cookies.token;
   }
 
-  // make sure token exists
+  // make sure token exist
   if (!token) {
-    return next(new ErrorResponse('Not authorize to access this route', 401));
+    return next(new ErrorResponse("Not authorize to access this route", 401));
   }
 
   // verify user
   try {
-    const decode = await jwt.verify(token, process.env.JWT_SECRET);
-    req.user = await User.findById(decode.id);
+    const decode = jwt.verify(token, process.env.JWT_SECRET);
+    const data = await models.User.findOne({
+      where: { id: decode.id, email: decode.email },
+    });
+
+    req.user = {
+      id: data.dataValues.id,
+      email: data.dataValues.email,
+      photo: data.dataValues.photo,
+      is_admin: data.dataValues.is_admin,
+      created_at: data.dataValues.createdAt,
+      updated_at: data.dataValues.updatedAt,
+    };
+
     next();
   } catch (error) {
-    return next(new ErrorResponse('Not authorize to access this route', 401));
+    return next(new ErrorResponse("Not authorize to access this route", 401));
   }
-});
+};
 
 // grant access to spesific roles
-exports.authorize = (...roles) => {
+exports.isAdmin = (condition) => {
   return (req, res, next) => {
-    if (!roles.includes(req.user.role)) {
+    if (req.user.is_admin !== condition) {
       return next(
         new ErrorResponse(
           `User role ${req.user.role} is not authorize to access this route`,
