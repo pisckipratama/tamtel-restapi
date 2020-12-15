@@ -1,0 +1,28 @@
+{
+  "name": "tamtel-restapi",
+  "version": "1.0.0",
+  "description": "REST API for TamTel App",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pisckipratama/tamtel-restapi.git"
+  },
+  "keywords": [
+    "nodejs",
+    "express",
+    "restapi"
+  ],
+  "author": "Piscki F. Pratama <pisckipratama@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pisckipratama/tamtel-restapi/issues"
+  },
+  "homepage": "https://github.com/pisckipratama/tamtel-restapi#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
