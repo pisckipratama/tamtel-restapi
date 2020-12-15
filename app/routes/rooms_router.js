@@ -4,6 +4,7 @@ const { protects, isAdmin } = require("../middlewares/auth");
 const multer = require("../helpers/multer");
 
 router.get("/", RoomsController.getAllRooms);
+router.get("/:id", RoomsController.getOneRoom);
 router.post(
   "/",
   protects,
