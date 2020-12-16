@@ -21,8 +21,8 @@ Sebuah perusahaan ingin membuat aplikasi pendaftaran ruangan meeting. Proses seb
       <b>CATATAN</b>: total orang tidak boleh lebih dari kapasitas ruangan
 - [x] User mendapatkan email tentang bokingan
 - [x] User mendapatkan email pemberitahuan ketika tanggal booking = tanggal saat ini
-- [ ] User Cek in ruangan
-- [ ] User mendapatkan email Cek In
+- [x] User Cek in ruangan
+- [x ] User mendapatkan email Cek In
 - [ ] Deployed
 
 #### 2. Buatlah Graph QL dari kasus tersebut
