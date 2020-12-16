@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const RoomsController = require("../controllers/rooms_controller");
+const BookingsController = require("../controllers/bookings_controller");
 const { protects, isAdmin } = require("../middlewares/auth");
 const multer = require("../helpers/multer");
 
@@ -13,4 +14,6 @@ router.post(
   RoomsController.postRoom
 );
 
+// booking routes
+router.post("/:roomId/booking", protects, isAdmin(false), BookingsController.postBookingByRoomId);
 module.exports = router;

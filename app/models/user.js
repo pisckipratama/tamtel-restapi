@@ -17,12 +17,12 @@ module.exports = (sequelize, DataTypes) => {
       email: DataTypes.STRING,
       password: DataTypes.STRING,
       photo: DataTypes.STRING,
-      delete_at: DataTypes.DATE,
       is_admin: DataTypes.BOOLEAN,
     },
     {
       sequelize,
       modelName: "User",
+      paranoid: true,
       hooks: {
         beforeCreate: (User, options) => {
           User.password = encrypt(User.password);

@@ -4,6 +4,7 @@ const morgan = require("morgan");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
+const scheduler = require('./app/helpers/scheduler');
 
 app = express();
 
@@ -25,6 +26,8 @@ if (process.env.NODE_ENV === "development") {
 // enable cors
 app.use(cors());
 
+scheduler.runningScheduler;
+
 // routes basic
 app.get("/", (req, res) => {
   const { name } = req.query;
@@ -36,8 +39,10 @@ app.get("/", (req, res) => {
 // routes modules
 const userRoute = require("./app/routes/users_router");
 const roomRoute = require("./app/routes/rooms_router");
+const bookingRoute = require('./app/routes/booking_router');
 app.use("/api/users", userRoute);
 app.use("/api/rooms", roomRoute);
+app.use("/api/booking", bookingRoute);
 
 // server initial
 const PORT = process.env.PORT || 1337;

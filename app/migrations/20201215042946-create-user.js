@@ -18,7 +18,7 @@ module.exports = {
       },
       photo: {
         type: Sequelize.STRING,
-        defaultValue: "photo.jpg",
+        defaultValue: "https://res.cloudinary.com/dtx75b7pa/image/upload/v1608084525/gjbqhpjujhvrmsmii0vu.png",
       },
       createdAt: {
         allowNull: false,
@@ -28,9 +28,8 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE,
       },
-      delete_at: {
+      deletedAt: {
         type: Sequelize.DATE,
-        allowNull: true,
       },
       is_admin: {
         type: Sequelize.BOOLEAN,
