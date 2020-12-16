@@ -28,14 +28,6 @@ app.use(cors());
 
 scheduler.runningScheduler;
 
-// routes basic
-app.get("/", (req, res) => {
-  const { name } = req.query;
-  res
-    .status(200)
-    .json({ success: true, message: `Hello ${name ? name : "Guest"}!` });
-});
-
 // routes modules
 const userRoute = require("./app/routes/users_router");
 const roomRoute = require("./app/routes/rooms_router");
