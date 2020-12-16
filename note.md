@@ -16,7 +16,7 @@ Sebuah perusahaan ingin membuat aplikasi pendaftaran ruangan meeting. Proses seb
 - [x] User Guest register dengan data (email, password, photo profile)
 - [x] User Guest login
 - [x] User Guest melihat ruangan yang tersedia
-- [ ] User Guest memboking di ruangan tersebut pada tanggal dan waktu yang telah dia tentukan.
+- [x] User Guest memboking di ruangan tersebut pada tanggal dan waktu yang telah dia tentukan.
       <b>CATATAN</b>: total orang tidak boleh lebih dari kapasitas ruangan
 - [ ] User mendapatkan email tentang bokingan
 - [ ] User mendapatkan email pemberitahuan ketika tanggal booking = tanggal saat ini
