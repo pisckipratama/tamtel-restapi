@@ -63,7 +63,7 @@ class RoomsController {
       return res.status(200).json({
         status: 200,
         success: true,
-        content: data,
+        content: data[0],
       });
     } catch (error) {
       console.error(error.message);

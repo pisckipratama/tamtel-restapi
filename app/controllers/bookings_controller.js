@@ -1,6 +1,7 @@
 const model = require('../models/index');
 const Joi = require("joi");
 const sendEmail = require('../helpers/send_email');
+const moment = require('moment');
 
 class BookingsController {
   static async postBookingByRoomId(req, res, next) {
@@ -77,16 +78,64 @@ class BookingsController {
 
   static async postCheckIn(req, res, next) {
     const { id } = req.params;
+    const { check_in_time } = req.body;
+    const { id: user_id } = req.user;
+
+    const schema = Joi.object().keys({
+      check_in_time: Joi.date().required()
+    });
+
     try {
-      
+      const payload = { check_in_time };
+      await schema.validateAsync(payload);
+
+      const dataRoom = await model.Booking.findAll({ where: { id } });
+      if (dataRoom.length === 0) {
+        return res.status(404).json({
+          status: 404,
+          success: false,
+          message: "data not found!"
+        });
+      }
+
+      if (dataRoom[0].dataValues.UserId !== user_id) {
+        return res.status(403).json({
+          status: 403,
+          success: false,
+          message: "user forbidden for accessing this route!"
+        });
+      }
+
+      if (
+        moment(dataRoom[0].dataValues.booking_time).format('YYYY-MM-DD') !== 
+        moment(Date.now()).format('YYYY-MM-DD')
+      ) {
+        return res.status(400).json({
+          status: 400,
+          success: false,
+          message: "Can not check in, maybe is not the time or expired!"
+        })
+      }
+
+      await model.Booking.update({ check_in_time }, {
+        where: { id, UserId: user_id }
+      });
+
+      res.status(201).json({
+        status: 201,
+        success: true,
+        message: "Checked In successfully!"
+      })
     } catch (error) {
-      
+      console.error(error.message);
+      res.status(500).json({ error: error.message });
     }
   }
 
   static async getAllBooking(req, res, next) {
     try {
       const dataBooking = await model.Booking.findAll({
+        where: { UserId: req.user.id },
         attributes: {
           exclude: ['createdAt', 'updatedAt', 'deletedAt', 'UserId', 'RoomId']
         },
@@ -100,6 +149,40 @@ class BookingsController {
         status: 200,
         success: true,
         content: dataBooking
+      });
+    } catch (error) {
+      console.error(error.message);
+      res.status(500).json({ error: error.message });
+    }
+  }
+
+  static async getBooking(req, res, next) {
+    const { id } = req.params;
+
+    try {
+      const dataBooking = await model.Booking.findAll({
+        where: { id },
+        attributes: {
+          exclude: ['createdAt', 'updatedAt', 'deletedAt', 'UserId', 'RoomId']
+        },
+        include: [
+          { model: model.User, attributes: ['email'] },
+          { model: model.Room, attributes: ['room_name', 'room_capacity'] }
+        ]
+      });
+
+      if (dataBooking.length === 0) {
+        return res.status(404).json({
+          status: 404,
+          success: false,
+          message: "data not found!"
+        });
+      }
+
+      return res.status(200).json({
+        status: 200,
+        success: true,
+        content: dataBooking[0]
       });
     } catch (error) {
       console.error(error.message);

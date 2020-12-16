@@ -43,7 +43,7 @@ const sendEmailScheduler = async () => {
   }
 };
 
-const runningScheduler = scheduler.scheduleJob('* 10 * * *', () => {
+const runningScheduler = scheduler.scheduleJob('* 3 * * *', () => {
   sendEmailScheduler();
 });
 
