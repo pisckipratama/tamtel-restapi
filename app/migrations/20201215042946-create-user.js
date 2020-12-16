@@ -28,9 +28,8 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE,
       },
-      delete_at: {
+      deletedAt: {
         type: Sequelize.DATE,
-        allowNull: true,
       },
       is_admin: {
         type: Sequelize.BOOLEAN,

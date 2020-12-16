@@ -6,17 +6,18 @@ const { generateToken } = require("../helpers/jwt");
 
 class UsersController {
   static async registerUser(req, res, next) {
-    const { email, password } = req.body;
+    const { email, password, is_admin } = req.body;
     const { filename, path } = req.file;
 
     const schema = Joi.object().keys({
       email: Joi.string().email().lowercase().required(),
       password: Joi.string().min(7).required().strict(),
       photo: Joi.string(),
+      is_admin: Joi.boolean(),
     });
 
     try {
-      let payload = { email, password, photo: filename };
+      let payload = { email, password, photo: filename, is_admin };
       await schema.validateAsync(payload);
       const checkUser = await models.User.findAll({
         where: { email },
