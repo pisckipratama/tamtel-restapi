@@ -48,7 +48,7 @@ exports.isAdmin = (condition) => {
     if (req.user.is_admin !== condition) {
       return next(
         new ErrorResponse(
-          `User role ${req.user.role} is not authorize to access this route`,
+          `User is not authorize to access this route`,
           403
         )
       );

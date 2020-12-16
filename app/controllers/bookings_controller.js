@@ -1,5 +1,6 @@
 const model = require('../models/index');
 const Joi = require("joi");
+const sendEmail = require('../helpers/send_email');
 
 class BookingsController {
   static async postBookingByRoomId(req, res, next) {
@@ -44,7 +45,6 @@ class BookingsController {
         });
       }
 
-      console.log(parseInt(dataRoom[0].dataValues.room_capacity))
       if (parseInt(total_person) > parseInt(dataRoom[0].dataValues.room_capacity)) {
         return res.status(400).json({
           status: 400,
@@ -54,6 +54,20 @@ class BookingsController {
       }
 
       const data = await model.Booking.create(payload);
+      const message = `
+      Please don't reply this email. Here is your booking detail,\n
+      Room Name \t: ${dataRoom[0].dataValues.room_name}
+      Total Person \t: ${total_person}
+      Booking Time \t: ${dataRoom[0].dataValues.booking_time}
+      Notes \t\t: ${noted}\n\n
+      if you are not booked, please contact us at support@tamtel.com
+      `
+
+      await sendEmail({
+        email: req.user.email,
+        subject: `Thanks for booking ${dataRoom[0].dataValues.room_name}`,
+        message
+      });
 
       return res.status(201).json({
         status: 201,
