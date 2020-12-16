@@ -43,6 +43,15 @@ module.exports = {
         onUpdate: "CASCADE",
         onDelete: "SET NULL",
       },
+      RoomId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: "Rooms",
+          key: "id"
+        },
+        onUpdate: "CASCADE",
+        onDelete: "SET NULL"
+      },
     });
   },
   down: async (queryInterface, Sequelize) => {

@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       this.belongsTo(models.User);
+      this.belongsTo(models.Room);
     }
   }
   Booking.init(

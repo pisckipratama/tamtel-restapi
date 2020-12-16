@@ -7,12 +7,21 @@ module.exports = {
       [
         {
           email: "admin@testing.com",
-          password: "nopassword",
+          password: "$2b$10$mmPI/wY1u.v4YffQJ/YPAeFMJf2RJFGas51vJwVyQ8pv741n9HLKy", // nopassword
           photo:
-            "https://res.cloudinary.com/dtx75b7pa/image/upload/v1589464507/sqi0f4srxumrho2f9kyg.jpg",
+            "https://res.cloudinary.com/dtx75b7pa/image/upload/v1608084525/gjbqhpjujhvrmsmii0vu.png",
           createdAt: new Date(),
           updatedAt: new Date(),
           is_admin: true,
+        },
+        {
+          email: "guest@testing.com",
+          password: "$2b$10$mmPI/wY1u.v4YffQJ/YPAeFMJf2RJFGas51vJwVyQ8pv741n9HLKy", // nopassword
+          photo:
+            "https://res.cloudinary.com/dtx75b7pa/image/upload/v1608084525/gjbqhpjujhvrmsmii0vu.png",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+          is_admin: false,
         },
       ],
       {}
