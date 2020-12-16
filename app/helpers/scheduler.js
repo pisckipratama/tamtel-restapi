@@ -28,6 +28,9 @@ const sendEmailScheduler = async () => {
       Booking Time \t: ${moment(item.booking_time).format('LL')}
       Notes \t\t: ${item.noted}\n\n
       if you are not booked, please contact us at support@tamtel.com
+
+      Best Regards,
+      TamTel Support.
       `;
 
       if (bookingTime === dateNow) {

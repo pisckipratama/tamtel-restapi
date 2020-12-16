@@ -49,6 +49,13 @@ class BookingsController {
       }
 
       const data = await model.Booking.create(payload);
+      res.status(201).json({
+        status: 201,
+        success: true,
+        message: "booking created successfully",
+        content: data
+      });
+
       const message = `
       Please don't reply this email. Here is your booking detail,\n
       Room Name \t: ${dataRoom[0].dataValues.room_name}
@@ -56,19 +63,15 @@ class BookingsController {
       Booking Time \t: ${dataRoom[0].dataValues.booking_time}
       Notes \t\t: ${noted}\n\n
       if you are not booked, please contact us at support@tamtel.com
+
+      Best Regards,
+      TamTel Support.
       `
 
       await sendEmail({
         email: req.user.email,
         subject: `Thanks for booking ${dataRoom[0].dataValues.room_name}`,
         message
-      });
-
-      return res.status(201).json({
-        status: 201,
-        success: true,
-        message: "booking created successfully",
-        content: data
       });
     } catch (error) {
       console.error(error.message);
@@ -125,7 +128,24 @@ class BookingsController {
         status: 201,
         success: true,
         message: "Checked In successfully!"
-      })
+      });
+
+      const message = `
+      Please don't reply this email.
+      You have been checked in your booked room.
+      Enjoy!
+
+      if you are not booked, please contact us at support@tamtel.com
+
+      Best Regards,
+      TamTel Support.
+      `;
+      console.log(req.user.email);
+      await sendEmail({
+        email: req.user.email,
+        subject: `Check In Successfully`,
+        message
+      });
     } catch (error) {
       console.error(error.message);
       res.status(500).json({ error: error.message });
