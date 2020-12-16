@@ -60,7 +60,7 @@ class BookingsController {
       Please don't reply this email. Here is your booking detail,\n
       Room Name \t: ${dataRoom[0].dataValues.room_name}
       Total Person \t: ${total_person}
-      Booking Time \t: ${dataRoom[0].dataValues.booking_time}
+      Booking Time \t: ${moment(booking_time).format('LL')}
       Notes \t\t: ${noted}\n\n
       if you are not booked, please contact us at support@tamtel.com
 
@@ -81,17 +81,9 @@ class BookingsController {
 
   static async postCheckIn(req, res, next) {
     const { id } = req.params;
-    const { check_in_time } = req.body;
     const { id: user_id } = req.user;
 
-    const schema = Joi.object().keys({
-      check_in_time: Joi.date().required()
-    });
-
     try {
-      const payload = { check_in_time };
-      await schema.validateAsync(payload);
-
       const dataRoom = await model.Booking.findAll({ where: { id } });
       if (dataRoom.length === 0) {
         return res.status(404).json({
@@ -128,7 +120,7 @@ class BookingsController {
         })
       }
 
-      await model.Booking.update({ check_in_time }, {
+      await model.Booking.update({ check_in_time: Date.now() }, {
         where: { id, UserId: user_id }
       });
 
