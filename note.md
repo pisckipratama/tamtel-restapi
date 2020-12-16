@@ -12,6 +12,7 @@
 
 Sebuah perusahaan ingin membuat aplikasi pendaftaran ruangan meeting. Proses sebagai berikut:
 
+#### 1. Buatlah Rest API dari kasus tersebut
 - [x] User admin login dan memasukkan data ruangan
 - [x] User Guest register dengan data (email, password, photo profile)
 - [x] User Guest login
@@ -19,13 +20,23 @@ Sebuah perusahaan ingin membuat aplikasi pendaftaran ruangan meeting. Proses seb
 - [x] User Guest memboking di ruangan tersebut pada tanggal dan waktu yang telah dia tentukan.
       <b>CATATAN</b>: total orang tidak boleh lebih dari kapasitas ruangan
 - [x] User mendapatkan email tentang bokingan
+- [x] User mendapatkan email pemberitahuan ketika tanggal booking = tanggal saat ini
+- [ ] User Cek in ruangan
+- [ ] User mendapatkan email Cek In
+- [ ] Deployed
+
+#### 2. Buatlah Graph QL dari kasus tersebut
+- [ ] User admin login dan memasukkan data ruangan
+- [ ] User Guest register dengan data (email, password, photo profile)
+- [ ] User Guest login
+- [ ] User Guest melihat ruangan yang tersedia
+- [ ] User Guest memboking di ruangan tersebut pada tanggal dan waktu yang telah dia tentukan.
+      <b>CATATAN</b>: total orang tidak boleh lebih dari kapasitas ruangan
+- [ ] User mendapatkan email tentang bokingan
 - [ ] User mendapatkan email pemberitahuan ketika tanggal booking = tanggal saat ini
 - [ ] User Cek in ruangan
 - [ ] User mendapatkan email Cek In
-
-1. Buatlah Rest API dari kasus tersebut
-2. Buatlah Graph QL dari kasus tersebut
-
+- [ ] Deployed
 ## Aturan
 
 - Gunakan pihak ketiga untuk mengirim email dan menyimpan image
