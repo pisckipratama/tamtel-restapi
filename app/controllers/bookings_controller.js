@@ -109,6 +109,14 @@ class BookingsController {
         });
       }
 
+      if (dataRoom[0].check_in_time !== null) {
+        return res.status(400).json({
+          status: 400,
+          success: false,
+          message: "Room already checked in!"
+        })
+      }
+
       if (
         moment(dataRoom[0].dataValues.booking_time).format('YYYY-MM-DD') !== 
         moment(Date.now()).format('YYYY-MM-DD')
