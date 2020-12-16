@@ -10,8 +10,6 @@ class BookingsController {
       total_person,
       booking_time,
       noted,
-      check_in_time,
-      check_out_time 
     } = req.body;
 
     const schema = Joi.object().keys({
@@ -19,18 +17,14 @@ class BookingsController {
       RoomId: Joi.number().required(),
       total_person: Joi.number().required(),
       booking_time: Joi.date().required(),
-      noted: Joi.any(),
-      check_in_time: Joi.date(),
-      check_out_time: Joi.date(),
+      noted: Joi.any()
     });
 
     try {
       const payload = { 
         total_person, 
         booking_time, 
-        noted, 
-        check_in_time, 
-        check_out_time, 
+        noted,
         UserId: id, 
         RoomId: roomId, 
       };
@@ -74,6 +68,38 @@ class BookingsController {
         success: true,
         message: "booking created successfully",
         content: data
+      });
+    } catch (error) {
+      console.error(error.message);
+      res.status(500).json({ error: error.message });
+    }
+  }
+
+  static async postCheckIn(req, res, next) {
+    const { id } = req.params;
+    try {
+      
+    } catch (error) {
+      
+    }
+  }
+
+  static async getAllBooking(req, res, next) {
+    try {
+      const dataBooking = await model.Booking.findAll({
+        attributes: {
+          exclude: ['createdAt', 'updatedAt', 'deletedAt', 'UserId', 'RoomId']
+        },
+        include: [
+          { model: model.User, attributes: ['email'] },
+          { model: model.Room, attributes: ['room_name', 'room_capacity'] }
+        ]
+      });
+
+      return res.status(200).json({
+        status: 200,
+        success: true,
+        content: dataBooking
       });
     } catch (error) {
       console.error(error.message);
