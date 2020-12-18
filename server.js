@@ -4,6 +4,10 @@ const morgan = require("morgan");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
+const helmet = require('helmet');
+const xss = require('xss-clean');
+const rateLimit = require('express-rate-limit');
+const hpp = require('hpp');
 const scheduler = require('./app/helpers/scheduler');
 
 app = express();
@@ -23,8 +27,17 @@ if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
 
-// enable cors
+// enable cors & security
+const limiter = rateLimit({
+  windowMs: 10 * 60 * 1000, // 10 mins
+  max: 100,
+});
+app.use(helmet());
+app.use(xss());
+app.use(hpp());
+app.use(limiter);
 app.use(cors());
+
 
 scheduler.runningScheduler;
 
