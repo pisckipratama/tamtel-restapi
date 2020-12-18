@@ -18,3 +18,19 @@ Backend application with RESTful API for TamTel Application
 - [x] User Cek in ruangan
 - [x] User mendapatkan email Cek In
 - [x] Deployed
+
+#### How to running at development enviroment
+`npm install` <br />
+`npm install sequelize-cli -g` _*) use sudo if you're Linux user_ <br />
+`sequelize db:migrate` <br />
+`sequelize db:seed:all` <br />
+`npm run dev` <br /> <br />
+
+try to login with this credential:
+- admin user
+      - username : `admin@testing.com`
+      - password : `nopassword`
+- guest user
+      - username : `guest@testing.com`
+      - password : `nopassword`
+
