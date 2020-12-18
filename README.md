@@ -27,10 +27,6 @@ Backend application with RESTful API for TamTel Application
 `npm run dev` <br /> <br />
 
 try to login with this credential:
-- admin user
-      - username : `admin@testing.com`
-      - password : `nopassword`
-- guest user
-      - username : `guest@testing.com`
-      - password : `nopassword`
+- admin user : _username_ `admin@testing.com` _password_ `nopassword`
+- guest user : _username_ `guest@testing.com` _password_ `nopassword`
 
