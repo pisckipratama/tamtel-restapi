@@ -20,13 +20,15 @@ Backend application with RESTful API for TamTel Application
 - [x] Deployed
 
 #### How to running at development enviroment
-`npm install` <br />
-`npm install sequelize-cli -g` _*) use sudo if you're Linux user_ <br />
-`sequelize db:migrate` <br />
-`sequelize db:seed:all` <br />
+`npm install` <br /> <br />
+`npm install sequelize-cli -g` _*) use sudo if you're Linux user_ <br /> <br />
+`sequelize db:migrate` <br /> <br />
+`sequelize db:seed:all` <br /> <br />
+`cp .env_example .env` _*) fill your dev environment_ <br /> <br />
 `npm run dev` <br /> <br />
 
-try to login with this credential:
+
+open http://localhost:3128/api and try to access login endpoint with this credential:
 - admin user : _username_ `admin@testing.com` _password_ `nopassword`
 - guest user : _username_ `guest@testing.com` _password_ `nopassword`
 
