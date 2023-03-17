@@ -19,8 +19,8 @@ jobs:
         run: |
           docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
       - name: Build the Docker image
-        run: docker build . --file Dockerfile --tag my-nodejs-app:${{ vars.GITHUB_RUN_NUMBER }}
+        run: docker build . --file Dockerfile --tag my-nodejs-app:${GITHUB_RUN_NUMBER}
       - name: Docker Push
         run: |
-          docker tag my-nodejs-app:${{ vars.GITHUB_RUN_NUMBER }} ${{secrets.DOCKER_USER}}/my-nodejs-app:${{ vars.GITHUB_RUN_NUMBER }}
-          docker push ${{secrets.DOCKER_USER}}/my-nodejs-app:${{ vars.GITHUB_RUN_NUMBER }}
+          docker tag my-nodejs-app:${GITHUB_RUN_NUMBER} ${{secrets.DOCKER_USER}}/my-nodejs-app:${GITHUB_RUN_NUMBER}
+          docker push ${{secrets.DOCKER_USER}}/my-nodejs-app:${GITHUB_RUN_NUMBER}
